@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class RecipeService {
-    private final String API_URL = "http://openapi.foodsafetykorea.go.kr/api/3649564af8f14222a7d2/COOKRCP01/json/1/1";
+    private final String API_URL = "http://openapi.foodsafetykorea.go.kr/api/3649564af8f14222a7d2/COOKRCP01/json/1/10";
 
     public JsonNode getRecipes() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
