@@ -19,7 +19,7 @@ public class PageController {
 
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "main/list";
     }
 
     @RequestMapping(value = "/crud/list", method = RequestMethod.GET)
