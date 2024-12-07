@@ -31,71 +31,85 @@ def fetch_api_data(start_idx, end_idx):
 
 # 데이터를 MariaDB에 저장
 def insert_data_to_db(data):
-    connection = pymysql.connect(**db_config)
-    cursor = connection.cursor()
-
-    recipe_insert_query = """
-        INSERT INTO recipes (recipe_name, cooking_method, dish_type, ingredients, hash_tag, low_sodium_tip)
-        VALUES (%s, %s, %s, %s, %s, %s)
-    """
-
-    nutrition_insert_query = """
-        INSERT INTO nutrition_info (recipe_id, weight, calories, carbohydrates, protein, fat, sodium)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """
-
-    manual_insert_query = """
-        INSERT INTO manual_steps (recipe_id, step_order, step_description, step_image_path)
-        VALUES (%s, %s, %s, %s)
-    """
-
+    connection = None
     try:
+        connection = pymysql.connect(**db_config)
+        cursor = connection.cursor()
+
+        recipe_insert_query = """
+            INSERT IGNORE INTO recipes (RCP_SEQ, recipe_name, cooking_method, dish_type, ingredients, hash_tag, low_sodium_tip)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """
+
+        nutrition_insert_query = """
+            INSERT IGNORE INTO nutrition_info (RCP_SEQ, weight, calories, carbohydrates, protein, fat, sodium)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """
+
+        manual_insert_query = """
+            INSERT IGNORE INTO manual_steps (RCP_SEQ, step_order, step_description, step_image_path)
+            VALUES (%s, %s, %s, %s)
+        """
+
         for recipe in data.get("COOKRCP01", {}).get("row", []):
-            # recipes 테이블 삽입
+            parts_details = recipe.get("RCP_PARTS_DTLS", "").replace("\n", " ")
             cursor.execute(recipe_insert_query, (
-                recipe.get("RCP_NM"),
-                recipe.get("RCP_WAY2"),
-                recipe.get("RCP_PAT2"),
-                recipe.get("RCP_PARTS_DTLS"),
-                recipe.get("HASH_TAG"),
-                recipe.get("RCP_NA_TIP")
+                recipe.get("RCP_SEQ", ""),  # RCP_SEQ 값을 사용
+                recipe.get("RCP_NM", ""),
+                recipe.get("RCP_WAY2", ""),
+                recipe.get("RCP_PAT2", ""),
+                parts_details,
+                recipe.get("HASH_TAG", ""),
+                recipe.get("RCP_NA_TIP", "")
             ))
-            recipe_id = cursor.lastrowid  # 삽입된 레시피 ID 가져오기
+            rcp_seq = recipe.get("RCP_SEQ", "")  # 삽입된 RCP_SEQ 값을 가져오기
 
-            # nutrition_info 테이블 삽입
+            # nutrition_info 테이블에 RCP_SEQ 삽입
             cursor.execute(nutrition_insert_query, (
-                recipe_id,
-                recipe.get("INFO_WGT"),
-                recipe.get("INFO_ENG"),
-                recipe.get("INFO_CAR"),
-                recipe.get("INFO_PRO"),
-                recipe.get("INFO_FAT"),
-                recipe.get("INFO_NA")
+                rcp_seq,
+                recipe.get("INFO_WGT", ""),
+                recipe.get("INFO_ENG", ""),
+                recipe.get("INFO_CAR", ""),
+                recipe.get("INFO_PRO", ""),
+                recipe.get("INFO_FAT", ""),
+                recipe.get("INFO_NA", "")
             ))
 
-            # manual_steps 테이블 삽입
+            # manual_steps 테이블에 RCP_SEQ 삽입
             for i in range(1, 21):  # 최대 20단계
                 step_description = recipe.get(f"MANUAL{i:02}")
                 step_image_path = recipe.get(f"MANUAL_IMG{i:02}")
-                if step_description:  # 단계가 존재하는 경우에만 삽입
+                if step_description:
                     cursor.execute(manual_insert_query, (
-                        recipe_id, i, step_description, step_image_path
+                        rcp_seq, i, step_description, step_image_path
                     ))
 
         connection.commit()
         print("데이터 삽입 완료!")
     except Exception as e:
         print(f"DB 삽입 중 오류 발생: {e}")
-        connection.rollback()
+        if connection:
+            connection.rollback()
     finally:
-        cursor.close()
-        connection.close()
+        if connection:
+            cursor.close()
+            connection.close()
+
+# 전체 데이터 가져오기
+def fetch_all_data(total_count):
+    start_idx = 0  # Adjust start index to 0-based
+    end_idx = 500  # Fetch 500 records at a time
+    while start_idx < total_count:  # Fetch until total_count
+        print(f"Fetching data from {start_idx} to {end_idx}")
+        api_data = fetch_api_data(start_idx, end_idx)
+        if api_data:
+            insert_data_to_db(api_data)
+        start_idx += 500
+        end_idx += 500
+        if end_idx > total_count:
+            end_idx = total_count
 
 # 실행
 if __name__ == "__main__":
-    start_idx = 1
-    end_idx = 10
-
-    api_data = fetch_api_data(start_idx, end_idx)
-    if api_data:
-        insert_data_to_db(api_data)
+    total_count = 1136  # 총 레시피 개수
+    fetch_all_data(total_count)
