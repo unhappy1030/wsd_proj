@@ -16,7 +16,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     // 레시피 목록 페이지
-    @GetMapping("/recipes")
+    @GetMapping("/")
     public String getAllRecipes(Model model) {
         List<Recipe> recipes = recipeService.getAllRecipes();
         System.out.println("recipe list: ");
