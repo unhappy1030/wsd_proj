@@ -1,16 +1,13 @@
 package org.example.wsd_proj.controller;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.wsd_proj.Service.RecipeService;
+import org.example.wsd_proj.VO.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class RecipeController {
@@ -18,19 +15,23 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("/")
-    public String getRecipes(Model model) {
-        try {
-            JsonNode recipesNode = recipeService.getRecipes();
-            if (recipesNode != null && recipesNode.has("COOKRCP01")) {
-                JsonNode rows = recipesNode.get("COOKRCP01").get("row");
-                ObjectMapper mapper = new ObjectMapper();
-                List<Map<String, Object>> recipes = mapper.convertValue(rows, new TypeReference<List<Map<String, Object>>>() {});
-                model.addAttribute("recipes", recipes);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    // 레시피 목록 페이지
+    @GetMapping("/recipes")
+    public String getAllRecipes(Model model) {
+        List<Recipe> recipes = recipeService.getAllRecipes();
+        System.out.println("recipe list: ");
+        for (Recipe recipe : recipes) {
+            System.out.println(recipe);
         }
-        return "recipe/list";
+        model.addAttribute("recipes", recipes); // 모델에 레시피 리스트 추가
+        return "recipe-list";  // 'recipe-list.jsp' 파일을 렌더링
+    }
+
+    // 레시피 상세 페이지
+    @GetMapping("/recipe/{rcpSeq}")
+    public String getRecipeDetail(@PathVariable("rcpSeq") String rcpSeq, Model model) {
+        Recipe recipe = recipeService.getRecipeById(rcpSeq);
+        model.addAttribute("recipe", recipe); // 모델에 레시피 객체 추가
+        return "recipe-detail";  // 'recipe-detail.jsp' 파일을 렌더링
     }
 }

@@ -30,6 +30,7 @@ def fetch_api_data(start_idx, end_idx):
         return None
 
 # 데이터를 MariaDB에 저장
+# 데이터를 MariaDB에 저장
 def insert_data_to_db(data):
     connection = None
     try:
@@ -37,8 +38,8 @@ def insert_data_to_db(data):
         cursor = connection.cursor()
 
         recipe_insert_query = """
-            INSERT IGNORE INTO recipes (RCP_SEQ, recipe_name, cooking_method, dish_type, ingredients, hash_tag, low_sodium_tip)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            INSERT IGNORE INTO recipes (RCP_SEQ, recipe_name, cooking_method, dish_type, ingredients, hash_tag, low_sodium_tip, main_image_path)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         """
 
         nutrition_insert_query = """
@@ -53,18 +54,24 @@ def insert_data_to_db(data):
 
         for recipe in data.get("COOKRCP01", {}).get("row", []):
             parts_details = recipe.get("RCP_PARTS_DTLS", "").replace("\n", " ")
+            main_image_path = recipe.get("ATT_FILE_NO_MAIN", "")  # 메인 이미지
+
+            # 디버깅용 출력: 삽입되는 데이터 확인
+            print(f"Inserting recipe: {recipe.get('RCP_NM', '')}, Main Image: {main_image_path}")
+
             cursor.execute(recipe_insert_query, (
-                recipe.get("RCP_SEQ", ""),  # RCP_SEQ 값을 사용
+                recipe.get("RCP_SEQ", ""),
                 recipe.get("RCP_NM", ""),
                 recipe.get("RCP_WAY2", ""),
                 recipe.get("RCP_PAT2", ""),
                 parts_details,
                 recipe.get("HASH_TAG", ""),
-                recipe.get("RCP_NA_TIP", "")
+                recipe.get("RCP_NA_TIP", ""),
+                main_image_path
             ))
-            rcp_seq = recipe.get("RCP_SEQ", "")  # 삽입된 RCP_SEQ 값을 가져오기
 
-            # nutrition_info 테이블에 RCP_SEQ 삽입
+            rcp_seq = recipe.get("RCP_SEQ", "")
+
             cursor.execute(nutrition_insert_query, (
                 rcp_seq,
                 recipe.get("INFO_WGT", ""),
@@ -75,7 +82,7 @@ def insert_data_to_db(data):
                 recipe.get("INFO_NA", "")
             ))
 
-            # manual_steps 테이블에 RCP_SEQ 삽입
+            # 단계별 요리법 삽입
             for i in range(1, 21):  # 최대 20단계
                 step_description = recipe.get(f"MANUAL{i:02}")
                 step_image_path = recipe.get(f"MANUAL_IMG{i:02}")
@@ -94,6 +101,7 @@ def insert_data_to_db(data):
         if connection:
             cursor.close()
             connection.close()
+
 
 # 전체 데이터 가져오기
 def fetch_all_data(total_count):

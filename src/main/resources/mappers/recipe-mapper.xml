@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recipe">
+
+    <!-- 모든 레시피 리스트 가져오기 -->
+    <select id="selectAllRecipes" resultType="org.example.wsd_proj.VO.Recipe">
+        SELECT * FROM recipes;
+    </select>
+
+    <!-- 특정 레시피 가져오기 -->
+    <select id="selectRecipeById" parameterType="String" resultType="org.example.wsd_proj.VO.Recipe">
+        SELECT * FROM recipes WHERE RCP_SEQ = #{rcpSeq};
+    </select>
+
+    <!-- 영양 정보 가져오기 -->
+    <select id="selectNutritionById" parameterType="String" resultType="org.example.wsd_proj.VO.Nutrition">
+        SELECT * FROM nutrition_info WHERE RCP_SEQ = #{rcpSeq};
+    </select>
+
+    <!-- 요리법 단계 가져오기 -->
+    <select id="selectManualById" parameterType="String" resultType="org.example.wsd_proj.VO.Manual">
+        SELECT * FROM manual_steps WHERE RCP_SEQ = #{rcpSeq} ORDER BY step_order;
+    </select>
+
+</mapper>

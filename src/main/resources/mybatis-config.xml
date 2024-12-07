@@ -4,6 +4,8 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="post" type="org.example.wsd_proj.VO.PostVO"/>
+        <typeAlias alias="recipe" type="org.example.wsd_proj.VO.Recipe"/>
+        <typeAlias alias="nutrition" type="org.example.wsd_proj.VO.Nutrition"/>
+        <typeAlias alias="manual" type="org.example.wsd_proj.VO.Manual"/>
     </typeAliases>
 </configuration>
