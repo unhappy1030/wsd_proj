@@ -18,7 +18,7 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("/recipes")
+    @GetMapping("/")
     public String getRecipes(Model model) {
         try {
             JsonNode recipesNode = recipeService.getRecipes();
@@ -31,6 +31,6 @@ public class RecipeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "recipes";
+        return "recipe/list";
     }
 }
