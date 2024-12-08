@@ -35,7 +35,7 @@ public class LoginController {
         if(loginvo != null){
             System.out.println("login success");
             session.setAttribute("login", loginvo);
-            reutrnURL = "redirect:/crud/list";
+            reutrnURL = "redirect:/";
         }
         else{
             System.out.println("login falied");

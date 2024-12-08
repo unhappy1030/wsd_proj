@@ -1,19 +1,30 @@
 package org.example.wsd_proj.Service;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.example.wsd_proj.DAO.RecipeDAO;
+import org.example.wsd_proj.VO.Recipe;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class RecipeService {
-    private final String API_URL = "http://openapi.foodsafetykorea.go.kr/api/3649564af8f14222a7d2/COOKRCP01/json/1/10";
 
-    public JsonNode getRecipes() throws JsonProcessingException {
-        RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject(API_URL, String.class);
+    @Autowired
+    private RecipeDAO recipeDAO;
 
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readTree(response); // JSON 객체로 반환
+    // 레시피 목록 가져오기
+    public List<Recipe> getAllRecipes() {
+        return recipeDAO.selectAllRecipes();
+    }
+
+    // 레시피 상세 정보 가져오기
+    public Recipe getRecipeById(String rcpSeq) {
+        Recipe recipe = recipeDAO.selectRecipeById(rcpSeq);
+        if (recipe != null) {
+            recipe.setNutritionInfo(recipeDAO.selectNutritionById(rcpSeq));
+            recipe.setManualSteps(recipeDAO.selectManualById(rcpSeq));
+        }
+        return recipe;
     }
 }
