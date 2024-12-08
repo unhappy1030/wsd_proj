@@ -52,7 +52,7 @@
     </div>
   </div>
 
-  <a href="/" class="btn btn-secondary mt-4">레시피 목록으로 돌아가기</a>
+  <a href="../" class="btn btn-secondary mt-4">레시피 목록으로 돌아가기</a>
 </div>
 
 <!-- Bootstrap JS and dependencies -->
