@@ -1,0 +1,46 @@
+<mapper namespace="crecipe">
+
+    <!-- 레시피 정보 수정 -->
+    <update id="updateCRecipe" parameterType="com.example.recipe.vo.CRecipe">
+        UPDATE crecipes
+        SET
+        user_id = #{userId},
+        recipe_name = #{recipeName},
+        cooking_method = #{cookingMethod},
+        dish_type = #{dishType},
+        ingredients = #{ingredients},
+        hash_tag = #{hashTag},
+        low_sodium_tip = #{lowSodiumTip},
+        main_image_path = #{mainImagePath}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 영양 정보 수정 -->
+    <update id="updateCNutrition" parameterType="com.example.recipe.vo.Nutrition">
+        UPDATE cnutrition
+        SET
+        weight = #{weight},
+        calories = #{calories},
+        carbohydrates = #{carbohydrates},
+        protein = #{protein},
+        fat = #{fat},
+        sodium = #{sodium}
+        WHERE recipe_id = #{recipeId}
+    </update>
+
+    <!-- 조리 단계 수정 -->
+    <update id="updateCManual" parameterType="java.util.List">
+        <foreach collection="manualSteps" item="step" separator=";">
+            UPDATE cmanual_steps
+            SET
+            step_description = #{step.stepDescription},
+            step_image_path = #{step.stepImagePath}
+            WHERE recipe_id = #{step.recipeId} AND step_order = #{step.stepOrder}
+        </foreach>
+    </update>
+
+    <!-- 레시피 정보 조회 -->
+    <select id="getRecipeById" resultType="com.example.recipe.vo.CRecipe">
+        SELECT * FROM crecipes WHERE id = #{rcpSeq}
+    </select>
+</mapper>
