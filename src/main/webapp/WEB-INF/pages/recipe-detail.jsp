@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="container mt-4">
-  <h1 class="display-4">${recipe.recipe_name}</h1>
-  <h2 class="text-primary">요리법: ${recipe.cooking_method}</h2>
+  <h1 class="display-4">${recipe.recipeName}</h1>
+  <h2 class="text-primary">요리법: ${recipe.cookingMethod}</h2>
 
   <div class="card mt-3">
     <div class="card-header">
@@ -62,15 +62,15 @@
         <c:forEach var="step" items="${recipe.manualSteps}">
           <div>
             <c:choose>
-              <c:when test="${step.step_image_path != null}">
-                <img src="${step.step_image_path}" class="card-img-top" alt="step${step.step_order}" style="height: max-content; object-fit: cover;">
+              <c:when test="${step.stepImagePath != null}">
+                <img src="${step.stepImagePath}" class="card-img-top" alt="step${step.stepOrder}" style="height: max-content; object-fit: cover;">
               </c:when>
               <c:otherwise>
                 <%-- 기본 이미지 경로를 사용 --%>
                 <img src="https://via.placeholder.com/300x200?text=이미지+없음" class="card-img-top" alt="이미지 없음">
               </c:otherwise>
             </c:choose>
-          <li class="list-group-item">${step.step_description}</li>
+          <li class="list-group-item">${step.stepDescription}</li>
           </div>
         </c:forEach>
       </ul>

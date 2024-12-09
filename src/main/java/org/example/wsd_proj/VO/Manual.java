@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Manual {
-    private String RCP_SEQ;
-    private int step_order;
-    private String step_description;
-    private String step_image_path;
+    private String rcpSeq;
+    private int stepOrder;
+    private String stepDescription;
+    private String stepImagePath;
 }

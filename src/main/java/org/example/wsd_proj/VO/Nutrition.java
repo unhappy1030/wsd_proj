@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Nutrition {
-    private String RCP_SEQ;
+    private String rcpSeq;
     private String weight;
     private String calories;
     private String carbohydrates;

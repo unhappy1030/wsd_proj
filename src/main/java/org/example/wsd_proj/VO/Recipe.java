@@ -7,14 +7,14 @@ import java.util.List;
 
 @Getter @Setter
 public class Recipe {
-    private String RCP_SEQ;
-    private String recipe_name;
-    private String cooking_method;
-    private String dish_type;
+    private String rcpSeq;
+    private String recipeName;
+    private String cookingMethod;
+    private String dishType;
     private String ingredients;
-    private String hash_tag;
-    private String low_sodium_tip;
-    private String main_image_path;
+    private String hashTag;
+    private String lowSodiumTip;
+    private String mainImagePath;
     private Nutrition nutritionInfo;
     private List<Manual> manualSteps;
 }

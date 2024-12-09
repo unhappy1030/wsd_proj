@@ -26,20 +26,20 @@
             <div class="col">
                 <div class="card h-100">
                     <c:choose>
-                        <c:when test="${recipe.main_image_path != null}">
-                            <img src="${recipe.main_image_path}" class="card-img-top" alt="89{recipe.recipe_name}" style="height: 200px; object-fit: cover;">
+                        <c:when test="${recipe.mainImagePath != null}">
+                            <img src="${recipe.mainImagePath}" class="card-img-top" alt="89{recipe.recipe_name}" style="height: 200px; object-fit: cover;">
                         </c:when>
                         <c:otherwise>
                             <img src="https://via.placeholder.com/300x200?text=이미지+없음" class="card-img-top" alt="이미지 없음">
                         </c:otherwise>
                     </c:choose>
                     <div class="card-body">
-                        <h5 class="card-title">${recipe.recipe_name != null ? recipe.recipe_name : '이름 없음'}</h5>
-                        <p class="card-text">${recipe.cooking_method != null ? recipe.cooking_method : '요리법 없음'}</p>
+                        <h5 class="card-title">${recipe.recipeName != null ? recipe.recipeName : '이름 없음'}</h5>
+                        <p class="card-text">${recipe.cookingMethod != null ? recipe.cookingMethod : '요리법 없음'}</p>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="recipe/${recipe.RCP_SEQ}" class="btn btn-primary">상세보기</a>
-                        <a href="edit/${recipe.RCP_SEQ}" class="btn btn-secondary">커스텀</a>
+                        <a href="recipe/${recipe.rcpSeq}" class="btn btn-primary">상세보기</a>
+                        <a href="edit/${recipe.rcpSeq}" class="btn btn-secondary">커스텀</a>
                     </div>
                 </div>
             </div>
