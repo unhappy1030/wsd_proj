@@ -29,14 +29,28 @@
       <h3>영양 정보</h3>
     </div>
     <div class="card-body">
-      <ul class="list-group">
-        <li class="list-group-item">칼로리: ${recipe.nutritionInfo.calories}</li>
-        <li class="list-group-item">탄수화물: ${recipe.nutritionInfo.carbohydrates}</li>
-        <li class="list-group-item">단백질: ${recipe.nutritionInfo.protein}</li>
-        <li class="list-group-item">지방: ${recipe.nutritionInfo.fat}</li>
-        <li class="list-group-item">나트륨: ${recipe.nutritionInfo.sodium}</li>
-      </ul>
+      <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+        <tr>
+          <th>칼로리</th>
+          <th>탄수화물</th>
+          <th>단백질</th>
+          <th>지방</th>
+          <th>나트륨</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>${recipe.nutritionInfo.calories}</td>
+          <td>${recipe.nutritionInfo.carbohydrates}</td>
+          <td>${recipe.nutritionInfo.protein}</td>
+          <td>${recipe.nutritionInfo.fat}</td>
+          <td>${recipe.nutritionInfo.sodium}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
+
   </div>
 
   <div class="card mt-3">

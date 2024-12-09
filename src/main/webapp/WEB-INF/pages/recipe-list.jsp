@@ -27,10 +27,9 @@
                 <div class="card h-100">
                     <c:choose>
                         <c:when test="${recipe.main_image_path != null}">
-                            <img src="${recipe.main_image_path}" class="card-img-top" alt="${recipe.recipe_name}" style="height: 200px; object-fit: cover;">
+                            <img src="${recipe.main_image_path}" class="card-img-top" alt="89{recipe.recipe_name}" style="height: 200px; object-fit: cover;">
                         </c:when>
                         <c:otherwise>
-                            <%-- 기본 이미지 경로를 사용 --%>
                             <img src="https://via.placeholder.com/300x200?text=이미지+없음" class="card-img-top" alt="이미지 없음">
                         </c:otherwise>
                     </c:choose>
@@ -40,6 +39,7 @@
                     </div>
                     <div class="card-footer text-center">
                         <a href="recipe/${recipe.RCP_SEQ}" class="btn btn-primary">상세보기</a>
+                        <a href="edit/${recipe.RCP_SEQ}" class="btn btn-secondary">커스텀</a>
                     </div>
                 </div>
             </div>
