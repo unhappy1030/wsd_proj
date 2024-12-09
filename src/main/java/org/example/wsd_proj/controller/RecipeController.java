@@ -19,10 +19,6 @@ public class RecipeController {
     @GetMapping("/")
     public String getAllRecipes(Model model) {
         List<Recipe> recipes = recipeService.getAllRecipes();
-        System.out.println("recipe list: ");
-        for (Recipe recipe : recipes) {
-            System.out.println(recipe);
-        }
         model.addAttribute("recipes", recipes); // 모델에 레시피 리스트 추가
         return "recipe-list";  // 'recipe-list.jsp' 파일을 렌더링
     }
@@ -33,5 +29,18 @@ public class RecipeController {
         Recipe recipe = recipeService.getRecipeById(rcpSeq);
         model.addAttribute("recipe", recipe); // 모델에 레시피 객체 추가
         return "recipe-detail";  // 'recipe-detail.jsp' 파일을 렌더링
+    }
+
+    @GetMapping("/edit/{rcpSeq}")
+    public String edit(@PathVariable("rcpSeq") String rcpSeq, Model model) {
+        Recipe recipe = recipeService.getRecipeById(rcpSeq);
+        if (recipe == null) {
+            throw new IllegalArgumentException("Recipe not found for id: " + rcpSeq);
+        }
+        else{
+            System.out.println("recipe : " + recipe);
+        }
+        model.addAttribute("recipe", recipe);
+        return "recipe-edit";
     }
 }
