@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
     <typeAliases>
         <typeAlias alias="recipe" type="org.example.wsd_proj.VO.Recipe"/>
         <typeAlias alias="nutrition" type="org.example.wsd_proj.VO.Nutrition"/>

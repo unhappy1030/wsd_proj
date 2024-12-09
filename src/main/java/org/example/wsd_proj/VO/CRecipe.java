@@ -1,13 +1,17 @@
 package org.example.wsd_proj.VO;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-@Getter @Setter
-public class Recipe {
-    private String rcpSeq;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class CRecipe {
+    private String id;
+    private String userId;
     private String recipeName;
     private String cookingMethod;
     private String dishType;
@@ -15,6 +19,7 @@ public class Recipe {
     private String hashTag;
     private String lowSodiumTip;
     private String mainImagePath;
-    private Nutrition nutritionInfo;
-    private List<Manual> manualSteps;
+    private CNutrition nutritionInfo;
+    private List<CManualStep> manualSteps;
+
 }

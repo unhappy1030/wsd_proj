@@ -13,14 +13,14 @@
 <div class="container mt-4">
     <h1 class="display-4">레시피 수정</h1>
 
-    <form action="/custom/update/${recipe.RCP_SEQ}" method="post">
+    <form action="/custom/update/${recipe.rcpSeq}" method="post">
         <div class="form-group">
             <label for="recipe_name">레시피 이름</label>
-            <input type="text" id="recipe_name" name="recipe_name" class="form-control" value="${recipe.recipe_name}" required>
+            <input type="text" id="recipe_name" name="recipe_name" class="form-control" value="${recipe.recipeName}" required>
         </div>
         <div class="form-group">
             <label for="cooking_method">요리법</label>
-            <input type="text" id="cooking_method" name="cooking_method" class="form-control" value="${recipe.cooking_method}" required>
+            <input type="text" id="cooking_method" name="cooking_method" class="form-control" value="${recipe.cookingMethod}" required>
         </div>
 
         <!-- 요리 재료 -->
@@ -31,30 +31,27 @@
 
         <!-- 영양 정보 -->
         <div class="form-group">
-            <label>영양 정보</label>
-            <div class="card-body">
-                <table class="table table-bordered table-striped text-center">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th>칼로리</th>
-                        <th>탄수화물</th>
-                        <th>단백질</th>
-                        <th>지방</th>
-                        <th>나트륨</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>${recipe.nutritionInfo.calories}</td>
-                        <td>${recipe.nutritionInfo.carbohydrates}</td>
-                        <td>${recipe.nutritionInfo.protein}</td>
-                        <td>${recipe.nutritionInfo.fat}</td>
-                        <td>${recipe.nutritionInfo.sodium}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
+            <label>영양 정보 수정</label>
+            <table class="table table-bordered text-center">
+                <thead>
+                <tr>
+                    <th>칼로리</th>
+                    <th>탄수화물</th>
+                    <th>단백질</th>
+                    <th>지방</th>
+                    <th>나트륨</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="number" name="nutritionInfo.calories" class="form-control" value="${recipe.nutritionInfo.calories}" required></td>
+                    <td><input type="number" step="0.1" name="nutritionInfo.carbohydrates" class="form-control" value="${recipe.nutritionInfo.carbohydrates}" required></td>
+                    <td><input type="number" step="0.1" name="nutritionInfo.protein" class="form-control" value="${recipe.nutritionInfo.protein}" required></td>
+                    <td><input type="number" step="0.1" name="nutritionInfo.fat" class="form-control" value="${recipe.nutritionInfo.fat}" required></td>
+                    <td><input type="number" step="0.1" name="nutritionInfo.sodium" class="form-control" value="${recipe.nutritionInfo.sodium}" required></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- 조리 방법 -->
@@ -63,10 +60,10 @@
             <c:forEach var="step" items="${recipe.manualSteps}">
                 <div class="form-row align-items-center mb-2">
                     <div class="col-8">
-                        <input type="text" name="manualSteps[${step.step_order - 1}].step_description" class="form-control" placeholder="조리 설명" value="${step.step_description}" required>
+                        <input type="text" name="manualSteps[${step.stepOrder - 1}].step_description" class="form-control" placeholder="조리 설명" value="${step.stepDescription}" required>
                     </div>
                     <div class="col-4">
-                        <input type="text" name="manualSteps[${step.step_order - 1}].step_image_path" class="form-control" placeholder="이미지 경로" value="${step.step_image_path}">
+                        <input type="text" name="manualSteps[${step.stepOrder - 1}].step_image_path" class="form-control" placeholder="이미지 경로" value="${step.stepImagePath}">
                     </div>
                 </div>
             </c:forEach>
