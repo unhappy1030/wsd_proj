@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,6 +22,6 @@ public class CRecipe {
     private String lowSodiumTip;
     private String mainImagePath;
     private CNutrition nutritionInfo;
-    private List<CManualStep> manualSteps;
+    private List<CManual> manualSteps;
 
 }

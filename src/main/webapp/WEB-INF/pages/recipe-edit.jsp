@@ -13,7 +13,7 @@
 <div class="container mt-4">
     <h1 class="display-4">레시피 수정</h1>
 
-    <form action="/custom/update/${recipe.rcpSeq}" method="post">
+    <form action="/custom/insert" method="post">
         <div class="form-group">
             <label for="recipe_name">레시피 이름</label>
             <input type="text" id="recipe_name" name="recipe_name" class="form-control" value="${recipe.recipeName}" required>
@@ -77,4 +77,5 @@
 
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
