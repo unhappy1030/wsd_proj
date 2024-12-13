@@ -31,7 +31,7 @@ public class RecipeController {
         return "recipe-detail";  // 'recipe-detail.jsp' 파일을 렌더링
     }
 
-    @GetMapping("/edit/{rcpSeq}")
+    @GetMapping("/recipeEdit/{rcpSeq}")
     public String edit(@PathVariable("rcpSeq") String rcpSeq, Model model) {
         Recipe recipe = recipeService.getRecipeById(rcpSeq);
         if (recipe == null) {

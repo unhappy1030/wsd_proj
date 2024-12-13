@@ -22,29 +22,47 @@ public class CRecipeDAO {
         return sqlSession.insert("crecipe.insertCNutrition", cNutrition);
     }
 
-    public int insertCManualSteps(List<CManual> cManuals) {
+    public int insertCManual(List<CManual> cManuals) {
         return sqlSession.insert("crecipe.insertCManualSteps", cManuals);
     }
 
-    public List<CRecipe> selectAllRecipes() {
-        return sqlSession.selectList("crecipe.selectAllRecipes");
+    public List<CRecipe> selectAllCRecipes(String userId) {
+        return sqlSession.selectList("crecipe.selectAllRecipes", userId);
     }
 
-    public CRecipe selectRecipeById(int id) {
+    public CRecipe selectCRecipeById(int id) {
         return sqlSession.selectOne("crecipe.selectCRecipeById", id);
     }
 
-    public CNutrition selectNutritionById(int id) {
+    public CNutrition selectCNutritionById(int id) {
         return sqlSession.selectOne("crecipe.selectCNutritionById", id);
     }
 
-    public List<CManual> selectManualById(int id) {
+    public List<CManual> selectCManualById(int id) {
         return sqlSession.selectList("crecipe.selectCManualById", id);
     }
 
-    public void deleteRecipeById(int id, String userId) {
-        sqlSession.delete("crecipe.deleteCNutritionInfoById", id);
-        sqlSession.delete("crecipe.deleteCManualStepsById", id);
-        sqlSession.delete("crecipe.deleteCRecipeById", Map.of("id", id, "userId", userId));
+    public void updateCNutrition(CNutrition cNutrition) {
+        sqlSession.update("crecipe.updateCRecipe", cNutrition);
     }
+    public void updateCManual(List<CManual> cManuals) {
+        sqlSession.update("crecipe.updateCRecipe", cManuals);
+    }
+    public void updateCRecipe(CRecipe cRecipe) {
+        sqlSession.update("crecipe.updateCRecipe", cRecipe);
+    }
+
+    public void deleteCManualById(int id) {
+        sqlSession.delete("crecipe.deleteCManualStepsById", id);
+    }
+
+    public void deleteCNutritionById(int id) {
+        sqlSession.delete("crecipe.deleteCNutritionById", id);
+    }
+
+    public void deleteCRecipeById(int id) {
+        sqlSession.delete("crecipe.deleteCRecipeById", id);
+    }
+
+
 }

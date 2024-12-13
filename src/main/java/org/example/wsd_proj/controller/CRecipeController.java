@@ -3,7 +3,6 @@ package org.example.wsd_proj.controller;
 import org.example.wsd_proj.Service.CRecipeService;
 import org.example.wsd_proj.VO.CManual;
 import org.example.wsd_proj.VO.CRecipe;
-import org.example.wsd_proj.VO.Recipe;
 import org.example.wsd_proj.VO.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ public class CRecipeController {
         if(loginvo != null) {
             model.addAttribute("user", loginvo);
         }
-        List<CRecipe> recipes = cRecipeService.getAllRecipes();
+        List<CRecipe> recipes = cRecipeService.getAllRecipes(loginvo.getUserid());
         model.addAttribute("recipes", recipes); // 모델에 레시피 리스트 추가
         return "crecipe-list";  // 'recipe-list.jsp' 파일을 렌더링
     }
@@ -60,7 +59,7 @@ public class CRecipeController {
             }
 
             cRecipeService.insertCNutrition(cRecipe.getNutritionInfo());
-            cRecipeService.insertCManualSteps(cRecipe.getManualSteps());
+            cRecipeService.insertCManual(cRecipe.getManualSteps());
 
             return "redirect:/";
         } else {
@@ -74,12 +73,37 @@ public class CRecipeController {
         UserVO loginvo = (UserVO) session.getAttribute("login");
         if(loginvo != null) {
             try {
-                cRecipeService.deleteRecipe(id, loginvo.getUserid());
+                cRecipeService.deleteRecipe(id);
                 model.addAttribute("message", "레시피가 삭제되었습니다.");
             } catch (Exception e) {
                 model.addAttribute("message", "레시피 삭제 실패: " + e.getMessage());
             }
         }
         return "redirect:/custom/";  // 'recipe-list.jsp' 파일을 렌더링
+    }
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id, Model model) {
+        CRecipe recipe = cRecipeService.getRecipeById(id);
+        model.addAttribute("recipe", recipe);
+        return "crecipe-edit";
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute CRecipe cRecipe, Model model, HttpSession session) {
+        UserVO loginUser = (UserVO) session.getAttribute("login");
+
+        if (loginUser != null) {
+            try {
+                cRecipeService.updateCRecipe(cRecipe);
+                cRecipeService.updateCNutrition(cRecipe.getNutritionInfo());
+                cRecipeService.updateCManual(cRecipe.getManualSteps());
+                model.addAttribute("message", "레시피가 성공적으로 업데이트되었습니다.");
+                return "redirect:/custom/";
+            } catch (Exception e) {
+                model.addAttribute("message", "레시피 업데이트 중 오류가 발생했습니다.");
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/login";
+        }
     }
 }
