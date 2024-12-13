@@ -20,6 +20,17 @@
             <input type="text" id="recipeName" name="recipeName" class="form-control" value="${recipe.recipeName}" required>
         </div>
         <div class="form-group">
+            <c:choose>
+                <c:when test="${recipe.mainImagePath != null}">
+                    <img src="${recipe.mainImagePath}" class="card-img-top" alt="89{recipe.recipe_name}" style="height: 200px; object-fit: cover;">
+                </c:when>
+                <c:otherwise>
+                    <img src="https://via.placeholder.com/300x200?text=이미지+없음" class="card-img-top" alt="이미지 없음">
+                </c:otherwise>
+            </c:choose>
+            <input type="text" id="mainImagePath" name="mainImagePath" class="form-control" value="${recipe.mainImagePath}" required>
+        </div>
+        <div class="form-group">
             <label for="cookingMethod">요리법</label>
             <input type="text" id="cookingMethod" name="cookingMethod" class="form-control" value="${recipe.cookingMethod}" required>
         </div>
