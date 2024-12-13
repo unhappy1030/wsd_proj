@@ -13,14 +13,14 @@
 <div class="container mt-4">
     <h1 class="display-4">레시피 수정</h1>
 
-    <form action="/custom/insert" method="post">
+    <form action="../custom/insert" method="post">
         <div class="form-group">
-            <label for="recipe_name">레시피 이름</label>
-            <input type="text" id="recipe_name" name="recipe_name" class="form-control" value="${recipe.recipeName}" required>
+            <label for="recipeName">레시피 이름</label>
+            <input type="text" id="recipeName" name="recipeName" class="form-control" value="${recipe.recipeName}" required>
         </div>
         <div class="form-group">
-            <label for="cooking_method">요리법</label>
-            <input type="text" id="cooking_method" name="cooking_method" class="form-control" value="${recipe.cookingMethod}" required>
+            <label for="cookingMethod">요리법</label>
+            <input type="text" id="cookingMethod" name="cookingMethod" class="form-control" value="${recipe.cookingMethod}" required>
         </div>
 
         <!-- 요리 재료 -->
@@ -57,13 +57,13 @@
         <!-- 조리 방법 -->
         <div class="form-group">
             <label>조리 방법</label>
-            <c:forEach var="step" items="${recipe.manualSteps}">
+            <c:forEach var="step" items="${recipe.manualSteps}" varStatus="status">
                 <div class="form-row align-items-center mb-2">
                     <div class="col-8">
-                        <input type="text" name="manualSteps[${step.stepOrder - 1}].step_description" class="form-control" placeholder="조리 설명" value="${step.stepDescription}" required>
+                        <input type="text" name="manualSteps[${status.index}].stepDescription" class="form-control" placeholder="조리 설명" value="${step.stepDescription}" required>
                     </div>
                     <div class="col-4">
-                        <input type="text" name="manualSteps[${step.stepOrder - 1}].step_image_path" class="form-control" placeholder="이미지 경로" value="${step.stepImagePath}">
+                        <input type="text" name="manualSteps[${status.index}].stepImagePath" class="form-control" placeholder="이미지 경로" value="${step.stepImagePath}">
                     </div>
                 </div>
             </c:forEach>

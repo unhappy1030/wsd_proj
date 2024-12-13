@@ -15,7 +15,8 @@ public class CRecipeDAO {
     private SqlSession sqlSession;
 
     public int insertCRecipe(CRecipe cRecipe) {
-        return sqlSession.insert("crecipe.insertCRecipe", cRecipe);
+        sqlSession.insert("crecipe.insertCRecipe", cRecipe);
+        return cRecipe.getId();
     }
 
     public int insertCNutrition(CNutrition cNutrition) {

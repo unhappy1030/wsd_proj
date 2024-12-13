@@ -1,14 +1,12 @@
 package org.example.wsd_proj.VO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class CManual {
     private String recipeId;
     private int stepOrder;
