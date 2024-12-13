@@ -15,6 +15,7 @@
         <div class="d-flex">
             <a class="btn btn-outline-light me-2" href="<%= request.getContextPath() %>/">Home</a>
             <a class="btn btn-outline-light" href="<%= request.getContextPath() %>/custom/">My Page</a>
+            <a class="btn btn-outline-light" href="<%= request.getContextPath() %>/login/logout">Logout</a>
         </div>
     </div>
 </nav>
