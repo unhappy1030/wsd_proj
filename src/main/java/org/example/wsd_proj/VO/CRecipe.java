@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CRecipe {
-    private String id;
+    private int id;
     private String userId;
     private String recipeName;
     private String cookingMethod;
@@ -20,6 +22,19 @@ public class CRecipe {
     private String lowSodiumTip;
     private String mainImagePath;
     private CNutrition nutritionInfo;
-    private List<CManualStep> manualSteps;
-
+    private List<CManual> manualSteps;
+    @Override
+    public String toString() {
+        return "CRecipe{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", recipeName='" + recipeName + '\'' +
+                ", cookingMethod='" + cookingMethod + '\'' +
+                ", dishType='" + dishType + '\'' +
+                ", ingredients='" + ingredients + '\'' +
+                ", hashTag='" + hashTag + '\'' +
+                ", lowSodiumTip='" + lowSodiumTip + '\'' +
+                ", mainImagePath='" + mainImagePath + '\'' +
+                '}';
+    }
 }

@@ -11,39 +11,19 @@ import java.util.List;
 
 @Repository
 public class CRecipeDAO {
-
     @Autowired
     private SqlSession sqlSession;
 
-    // 레시피 정보 가져오기 (crecipes 테이블)
-    public CRecipe selectRecipeById(String rcpSeq) {
-        return sqlSession.selectOne("crecipe.selectRecipeById", rcpSeq);
+    public int insertCRecipe(CRecipe cRecipe) {
+        sqlSession.insert("crecipe.insertCRecipe", cRecipe);
+        return cRecipe.getId();
     }
 
-    // 영양 정보 가져오기 (cnutrition 테이블)
-    public CNutrition selectNutritionByRecipeId(String rcpSeq) {
-        return sqlSession.selectOne("crecipe.selectNutritionByRecipeId", rcpSeq);
+    public int insertCNutrition(CNutrition cNutrition) {
+        return sqlSession.insert("crecipe.insertCNutrition", cNutrition);
     }
 
-    // 조리법 단계 가져오기 (cmanual_steps 테이블)
-    public List<CManual> selectManualStepsByRecipeId(String rcpSeq) {
-        return sqlSession.selectList("crecipe.selectManualStepsByRecipeId", rcpSeq);
-    }
-
-    // 레시피 정보 수정 (crecipes 테이블)
-    public void updateRecipe(CRecipe recipe) {
-        sqlSession.update("crecipe.updateRecipe", recipe);
-    }
-
-    // 영양 정보 수정 (cnutrition 테이블)
-    public void updateNutritionInfo(CNutrition nutritionInfo) {
-        sqlSession.update("crecipe.updateNutritionInfo", nutritionInfo);
-    }
-
-    // 조리법 단계 수정 (cmanual_steps 테이블)
-    public void updateManualSteps(List<CManual> manualSteps) {
-        for (CManual step : manualSteps) {
-            sqlSession.update("crecipe.updateManualStep", step);
-        }
+    public int insertCManualSteps(List<CManual> cManuals) {
+        return sqlSession.insert("crecipe.insertCManualSteps", cManuals);
     }
 }

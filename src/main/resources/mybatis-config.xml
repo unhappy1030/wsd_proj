@@ -11,5 +11,8 @@
         <typeAlias alias="recipe" type="org.example.wsd_proj.VO.Recipe"/>
         <typeAlias alias="nutrition" type="org.example.wsd_proj.VO.Nutrition"/>
         <typeAlias alias="manual" type="org.example.wsd_proj.VO.Manual"/>
+        <typeAlias alias="crecipe" type="org.example.wsd_proj.VO.CRecipe"/>
+        <typeAlias alias="cnutrition" type="org.example.wsd_proj.VO.CNutrition"/>
+        <typeAlias alias="cmanual" type="org.example.wsd_proj.VO.CManual"/>
     </typeAliases>
 </configuration>
