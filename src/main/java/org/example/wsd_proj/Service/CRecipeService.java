@@ -29,6 +29,14 @@ public class CRecipeService {
     public List<CRecipe> getAllRecipes() {
         return cRecipeDAO.selectAllRecipes();
     }
+    public CRecipe getRecipeById(int id) {
+        CRecipe recipe = cRecipeDAO.selectRecipeById(id);
+        if (recipe != null) {
+            recipe.setNutritionInfo(cRecipeDAO.selectNutritionById(id));
+            recipe.setManualSteps(cRecipeDAO.selectManualById(id));
+        }
+        return recipe;
+    }
 
     public void deleteRecipe(int id, String userId) {
         // DAO를 통해 레시피 삭제
