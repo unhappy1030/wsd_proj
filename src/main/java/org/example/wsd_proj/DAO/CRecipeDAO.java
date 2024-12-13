@@ -1,10 +1,7 @@
 package org.example.wsd_proj.DAO;
 
 import org.apache.ibatis.session.SqlSession;
-import org.example.wsd_proj.VO.CManual;
-import org.example.wsd_proj.VO.CNutrition;
-import org.example.wsd_proj.VO.CRecipe;
-import org.example.wsd_proj.VO.Recipe;
+import org.example.wsd_proj.VO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +28,18 @@ public class CRecipeDAO {
 
     public List<CRecipe> selectAllRecipes() {
         return sqlSession.selectList("crecipe.selectAllRecipes");
+    }
+
+    public CRecipe selectRecipeById(int id) {
+        return sqlSession.selectOne("crecipe.selectCRecipeById", id);
+    }
+
+    public CNutrition selectNutritionById(int id) {
+        return sqlSession.selectOne("crecipe.selectCNutritionById", id);
+    }
+
+    public List<CManual> selectManualById(int id) {
+        return sqlSession.selectList("crecipe.selectCManualById", id);
     }
 
     public void deleteRecipeById(int id, String userId) {

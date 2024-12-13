@@ -30,6 +30,13 @@ public class CRecipeController {
         return "crecipe-list";  // 'recipe-list.jsp' 파일을 렌더링
     }
 
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") int id,Model model) {
+        CRecipe recipe = cRecipeService.getRecipeById(id);
+        model.addAttribute("recipe", recipe); // 모델에 레시피 리스트 추가
+        return "crecipe-detail";  // 'recipe-list.jsp' 파일을 렌더링
+    }
+
     @PostMapping("/insert")
     public String insertRecipe(@ModelAttribute CRecipe cRecipe, Model model, HttpSession session) {
         UserVO loginvo = (UserVO) session.getAttribute("login");

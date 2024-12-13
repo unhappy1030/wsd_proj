@@ -67,6 +67,16 @@
         SELECT * FROM crecipes;
     </select>
 
+    <select id="selectCRecipeById" parameterType="int" resultType="org.example.wsd_proj.VO.CRecipe">
+        SELECT * FROM crecipes WHERE id = #{id};
+    </select>
+    <select id="selectCNutritionById" parameterType="int" resultType="org.example.wsd_proj.VO.CNutrition">
+        SELECT * FROM cnutrition_info WHERE recipe_id = #{id};
+    </select>
+    <select id="selectCManualById" parameterType="int" resultType="org.example.wsd_proj.VO.CManual">
+        SELECT * FROM cmanual_steps WHERE recipe_id = #{id} ORDER BY step_order;
+    </select>
+
     <delete id="deleteCRecipeById" parameterType="map">
         DELETE FROM crecipes
         WHERE id = #{id} AND user_id = #{userId}
