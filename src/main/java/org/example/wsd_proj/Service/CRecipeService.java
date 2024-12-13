@@ -29,4 +29,9 @@ public class CRecipeService {
     public List<CRecipe> getAllRecipes() {
         return cRecipeDAO.selectAllRecipes();
     }
+
+    public void deleteRecipe(int id, String userId) {
+        // DAO를 통해 레시피 삭제
+        cRecipeDAO.deleteRecipeById(id, userId);
+    }
 }

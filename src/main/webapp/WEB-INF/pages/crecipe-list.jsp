@@ -58,7 +58,8 @@
                             </div>
                             <div class="card-footer text-center">
                                 <a href="recipe/${recipe.id}" class="btn btn-primary">상세보기</a>
-                                <a href="edit/${recipe.id}" class="btn btn-secondary">커스텀</a>
+                                <a href="edit/${recipe.id}" class="btn btn-secondary">수정</a>
+                                <a href="delete/${recipe.id}" class="btn btn-danger">X</a>
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CRecipeDAO {
@@ -30,5 +31,11 @@ public class CRecipeDAO {
 
     public List<CRecipe> selectAllRecipes() {
         return sqlSession.selectList("crecipe.selectAllRecipes");
+    }
+
+    public void deleteRecipeById(int id, String userId) {
+        sqlSession.delete("crecipe.deleteCNutritionInfoById", id);
+        sqlSession.delete("crecipe.deleteCManualStepsById", id);
+        sqlSession.delete("crecipe.deleteCRecipeById", Map.of("id", id, "userId", userId));
     }
 }
