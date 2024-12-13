@@ -20,7 +20,11 @@ public class CRecipeController {
     @Autowired
     private CRecipeService cRecipeService;
     @GetMapping("/")
-    public String myPage(Model model) {
+    public String myPage(Model model, HttpSession session) {
+        UserVO loginvo = (UserVO) session.getAttribute("login");
+        if(loginvo != null) {
+            model.addAttribute("user", loginvo);
+        }
         List<CRecipe> recipes = cRecipeService.getAllRecipes();
         model.addAttribute("recipes", recipes); // 모델에 레시피 리스트 추가
         return "crecipe-list";  // 'recipe-list.jsp' 파일을 렌더링
