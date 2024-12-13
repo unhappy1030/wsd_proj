@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.example.wsd_proj.VO.CManual;
 import org.example.wsd_proj.VO.CNutrition;
 import org.example.wsd_proj.VO.CRecipe;
+import org.example.wsd_proj.VO.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,5 +26,9 @@ public class CRecipeDAO {
 
     public int insertCManualSteps(List<CManual> cManuals) {
         return sqlSession.insert("crecipe.insertCManualSteps", cManuals);
+    }
+
+    public List<CRecipe> selectAllRecipes() {
+        return sqlSession.selectList("crecipe.selectAllRecipes");
     }
 }

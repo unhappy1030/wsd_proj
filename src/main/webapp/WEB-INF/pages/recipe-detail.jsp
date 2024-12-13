@@ -11,6 +11,7 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="comp/top.jsp" />
 <div class="container mt-4">
   <h1 class="display-4">${recipe.recipeName}</h1>
   <h2 class="text-primary">요리법: ${recipe.cookingMethod}</h2>

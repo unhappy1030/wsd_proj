@@ -3,6 +3,7 @@ package org.example.wsd_proj.controller;
 import org.example.wsd_proj.Service.CRecipeService;
 import org.example.wsd_proj.VO.CManual;
 import org.example.wsd_proj.VO.CRecipe;
+import org.example.wsd_proj.VO.Recipe;
 import org.example.wsd_proj.VO.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,12 @@ public class CRecipeController {
 
     @Autowired
     private CRecipeService cRecipeService;
+    @GetMapping("/")
+    public String myPage(Model model) {
+        List<CRecipe> recipes = cRecipeService.getAllRecipes();
+        model.addAttribute("recipes", recipes); // 모델에 레시피 리스트 추가
+        return "crecipe-list";  // 'recipe-list.jsp' 파일을 렌더링
+    }
 
     @PostMapping("/insert")
     public String insertRecipe(@ModelAttribute CRecipe cRecipe, Model model, HttpSession session) {

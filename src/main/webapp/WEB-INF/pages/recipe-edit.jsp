@@ -10,6 +10,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="comp/top.jsp" />
 <div class="container mt-4">
     <h1 class="display-4">레시피 수정</h1>
 
