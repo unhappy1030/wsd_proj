@@ -61,4 +61,18 @@ public class CRecipeController {
             return "redirect:/login";
         }
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id, Model model, HttpSession session) {
+        UserVO loginvo = (UserVO) session.getAttribute("login");
+        if(loginvo != null) {
+            try {
+                cRecipeService.deleteRecipe(id, loginvo.getUserid());
+                model.addAttribute("message", "레시피가 삭제되었습니다.");
+            } catch (Exception e) {
+                model.addAttribute("message", "레시피 삭제 실패: " + e.getMessage());
+            }
+        }
+        return "redirect:/custom/";  // 'recipe-list.jsp' 파일을 렌더링
+    }
 }

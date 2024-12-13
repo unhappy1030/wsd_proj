@@ -67,6 +67,17 @@
         SELECT * FROM crecipes;
     </select>
 
-
+    <delete id="deleteCRecipeById" parameterType="map">
+        DELETE FROM crecipes
+        WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+    <delete id="deleteCNutritionInfoById" parameterType="int">
+        DELETE FROM cnutrition_info
+        WHERE recipe_id = #{id}
+    </delete>
+    <delete id="deleteCManualStepsById" parameterType="int">
+        DELETE FROM cmanual_steps
+        WHERE recipe_id = #{id}
+    </delete>
 </mapper>
 
