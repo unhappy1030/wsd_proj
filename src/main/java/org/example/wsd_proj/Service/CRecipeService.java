@@ -4,6 +4,7 @@ import org.example.wsd_proj.DAO.CRecipeDAO;
 import org.example.wsd_proj.VO.CManual;
 import org.example.wsd_proj.VO.CNutrition;
 import org.example.wsd_proj.VO.CRecipe;
+import org.example.wsd_proj.VO.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,9 @@ public class CRecipeService {
     }
     public int insertCManualSteps(List<CManual> cManuals) {
         return cRecipeDAO.insertCManualSteps(cManuals);
+    }
+
+    public List<CRecipe> getAllRecipes() {
+        return cRecipeDAO.selectAllRecipes();
     }
 }

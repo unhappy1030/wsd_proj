@@ -62,5 +62,11 @@
             )
         </foreach>
     </insert>
+
+    <select id="selectAllRecipes" resultType="org.example.wsd_proj.VO.CRecipe">
+        SELECT * FROM crecipes;
+    </select>
+
+
 </mapper>
 
