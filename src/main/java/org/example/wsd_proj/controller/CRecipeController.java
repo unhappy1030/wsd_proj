@@ -111,4 +111,8 @@ public class CRecipeController {
             return "redirect:/login";
         }
     }
+    @GetMapping("/create")
+    public String create(Model model) {
+        return "crecipe-create";
+    }
 }

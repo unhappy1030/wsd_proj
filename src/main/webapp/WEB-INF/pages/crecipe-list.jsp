@@ -32,6 +32,9 @@
         <div class="col-md-8">
             <!-- 레시피 목록 섹션 -->
             <h1 class="text-center mb-4">내 레시피 목록</h1>
+            <div class="text-end mb-3">
+                <a href="create" class="btn btn-success">새 레시피 추가하기</a>
+            </div>
 
             <!-- 빈 리스트 확인 -->
             <c:if test="${empty recipes}">
