@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-footer text-center">
                         <a href="recipe/${recipe.rcpSeq}" class="btn btn-primary">상세보기</a>
-                        <a href="edit/${recipe.rcpSeq}" class="btn btn-secondary">커스텀</a>
+                        <a href="recipeEdit/${recipe.rcpSeq}" class="btn btn-secondary">커스텀</a>
                     </div>
                 </div>
             </div>

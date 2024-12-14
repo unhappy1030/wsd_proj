@@ -63,8 +63,8 @@
         </foreach>
     </insert>
 
-    <select id="selectAllRecipes" resultType="org.example.wsd_proj.VO.CRecipe">
-        SELECT * FROM crecipes;
+    <select id="selectAllRecipes" parameterType="String" resultType="org.example.wsd_proj.VO.CRecipe">
+        SELECT * FROM crecipes WHERE user_id = '${userId}';
     </select>
 
     <select id="selectCRecipeById" parameterType="int" resultType="org.example.wsd_proj.VO.CRecipe">
@@ -77,11 +77,46 @@
         SELECT * FROM cmanual_steps WHERE recipe_id = #{id} ORDER BY step_order;
     </select>
 
-    <delete id="deleteCRecipeById" parameterType="map">
+    <update id="updateCRecipe" parameterType="org.example.wsd_proj.VO.CRecipe">
+        UPDATE crecipes
+        SET
+        user_id = #{userId},
+        recipe_name = #{recipeName},
+        cooking_method = #{cookingMethod},
+        dish_type = #{dishType},
+        ingredients = #{ingredients},
+        hash_tag = #{hashTag},
+        low_sodium_tip = #{lowSodiumTip},
+        main_image_path = #{mainImagePath}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateCNutrition" parameterType="org.example.wsd_proj.VO.CNutrition">
+        UPDATE cnutrition_info
+        SET
+        weight = #{weight},
+        calories = #{calories},
+        carbohydrates = #{carbohydrates},
+        protein = #{protein},
+        fat = #{fat},
+        sodium = #{sodium}
+        WHERE recipe_id = #{recipeId}
+    </update>
+
+    <update id="updateSingleCManualStep" parameterType="CManual">
+        UPDATE cmanual_steps
+        SET
+        step_description = #{stepDescription},
+        step_image_path = #{stepImagePath}
+        WHERE recipe_id = #{recipeId} AND step_order = #{stepOrder}
+    </update>
+
+
+    <delete id="deleteCRecipeById" parameterType="int">
         DELETE FROM crecipes
-        WHERE id = #{id} AND user_id = #{userId}
+        WHERE id = #{id}
     </delete>
-    <delete id="deleteCNutritionInfoById" parameterType="int">
+    <delete id="deleteCNutritionById" parameterType="int">
         DELETE FROM cnutrition_info
         WHERE recipe_id = #{id}
     </delete>
