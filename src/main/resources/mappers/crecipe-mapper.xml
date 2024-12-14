@@ -119,7 +119,7 @@
         DELETE FROM crecipes
         WHERE id = #{id}
     </delete>
-    <delete id="deleteCNutritionInfoById" parameterType="int">
+    <delete id="deleteCNutritionById" parameterType="int">
         DELETE FROM cnutrition_info
         WHERE recipe_id = #{id}
     </delete>
