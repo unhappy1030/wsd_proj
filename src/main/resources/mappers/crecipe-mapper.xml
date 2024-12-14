@@ -103,15 +103,12 @@
         WHERE recipe_id = #{recipeId}
     </update>
 
-    <update id="updateCManualSteps" parameterType="java.util.List">
-        <foreach collection="list" item="manual" separator=";">
-            UPDATE cmanual_steps
-            SET
-            step_order = #{manual.stepOrder},
-            step_description = #{manual.stepDescription},
-            step_image_path = #{manual.stepImagePath}
-            WHERE recipe_id = #{manual.recipeId} AND step_order = #{manual.stepOrder}
-        </foreach>
+    <update id="updateSingleCManualStep" parameterType="CManual">
+        UPDATE cmanual_steps
+        SET
+        step_description = #{stepDescription},
+        step_image_path = #{stepImagePath}
+        WHERE recipe_id = #{recipeId} AND step_order = #{stepOrder}
     </update>
 
 

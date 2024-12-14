@@ -43,10 +43,12 @@ public class CRecipeDAO {
     }
 
     public void updateCNutrition(CNutrition cNutrition) {
-        sqlSession.update("crecipe.updateCRecipe", cNutrition);
+        sqlSession.update("crecipe.updateCNutrition", cNutrition);
     }
     public void updateCManual(List<CManual> cManuals) {
-        sqlSession.update("crecipe.updateCRecipe", cManuals);
+        for (CManual manual : cManuals) {
+            sqlSession.update("crecipe.updateSingleCManualStep", manual);
+        }
     }
     public void updateCRecipe(CRecipe cRecipe) {
         sqlSession.update("crecipe.updateCRecipe", cRecipe);

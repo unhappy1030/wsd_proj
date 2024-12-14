@@ -15,7 +15,8 @@
     <h1 class="display-4">레시피 수정</h1>
 
     <form action="../update" method="post">
-        <input type="hidden" name="recipeId" value="${recipe.id}">
+        <input type="hidden" name="id" value="${recipe.id}">
+        <input type="hidden" name="userId" value="${recipe.userId}">
         <div class="form-group">
             <label for="recipeName">레시피 이름</label>
             <input type="text" id="recipeName" name="recipeName" class="form-control" value="${recipe.recipeName}" required>
@@ -44,6 +45,7 @@
 
         <!-- 영양 정보 -->
         <div class="form-group">
+            <input type="hidden" name="nutritionInfo.recipeId" value="${recipe.id}">
             <label>영양 정보 수정</label>
             <table class="table table-bordered text-center">
                 <thead>
@@ -72,6 +74,8 @@
             <label>조리 방법</label>
             <c:forEach var="step" items="${recipe.manualSteps}" varStatus="status">
                 <div class="form-row align-items-center mb-2">
+                    <input type="hidden" name="manualSteps[${status.index}].recipeId" value="${recipe.id}">
+                    <input type="hidden" name="manualSteps[${status.index}].stepOrder" value="${status.index}">
                     <div class="col-8">
                         <input type="text" name="manualSteps[${status.index}].stepDescription" class="form-control" placeholder="조리 설명" value="${step.stepDescription}" required>
                     </div>

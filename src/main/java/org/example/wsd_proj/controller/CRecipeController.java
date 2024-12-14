@@ -93,13 +93,18 @@ public class CRecipeController {
 
         if (loginUser != null) {
             try {
-                cRecipeService.updateCRecipe(cRecipe);
+                for (CManual step : cRecipe.getManualSteps()) {
+                    System.out.println("step: " + step.toString());
+                }
                 cRecipeService.updateCNutrition(cRecipe.getNutritionInfo());
                 cRecipeService.updateCManual(cRecipe.getManualSteps());
-                model.addAttribute("message", "레시피가 성공적으로 업데이트되었습니다.");
+                cRecipeService.updateCRecipe(cRecipe);
+                System.out.println("custom recipe update success");
                 return "redirect:/custom/";
             } catch (Exception e) {
                 model.addAttribute("message", "레시피 업데이트 중 오류가 발생했습니다.");
+                System.out.println("custom recipe update failed");
+                System.out.println(e.getMessage());
                 return "redirect:/";
             }
         } else {
