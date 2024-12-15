@@ -39,7 +39,7 @@
       <p>${recipe.ingredients}</p>
     </div>
   </div>
-  <form action="/your-endpoint-here" method="POST">
+  <form action="../updateCheckList" method="POST">
     <div class="form-group">
       <label for="ingredientsContainer">재료 체크 리스트</label>
 

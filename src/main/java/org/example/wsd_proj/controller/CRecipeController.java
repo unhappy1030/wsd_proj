@@ -1,5 +1,6 @@
 package org.example.wsd_proj.controller;
 
+import org.example.wsd_proj.DTO.IngredientListDTO;
 import org.example.wsd_proj.Service.CRecipeService;
 import org.example.wsd_proj.VO.CManual;
 import org.example.wsd_proj.VO.CRecipe;
@@ -127,7 +128,8 @@ public class CRecipeController {
         return "crecipe-create";
     }
     @PostMapping("/updateCheckList")
-    public String updateCheckList(@RequestBody List<CRecipeIngredient> ingredients, Model model, HttpSession session) {
+    public String updateCheckList(@ModelAttribute IngredientListDTO ingredientListDTO, Model model, HttpSession session) {
+        List<CRecipeIngredient> ingredients = ingredientListDTO.getIngredients();
         if (ingredients != null && !ingredients.isEmpty()) {
             for (CRecipeIngredient ingredient : ingredients) {
                 System.out.println("ingredient: " + ingredient.toString());
