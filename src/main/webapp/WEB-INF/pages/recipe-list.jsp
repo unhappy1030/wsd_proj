@@ -15,6 +15,14 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">레시피 목록</h1>
 
+    <!-- 검색 폼 -->
+    <form action="search" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control" placeholder="레시피 이름으로 검색" aria-label="검색" required>
+            <button class="btn btn-primary" type="submit">검색</button>
+        </div>
+    </form>
+
     <!-- 빈 리스트 확인 -->
     <c:if test="${empty recipes}">
         <div class="alert alert-warning text-center" role="alert">

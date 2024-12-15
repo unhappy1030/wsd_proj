@@ -20,6 +20,10 @@ public class RecipeDAO {
         return sqlSession.selectList("recipe.selectAllRecipes");
     }
 
+    public List<Recipe> findByRecipeNameContaining(String query) {
+        return sqlSession.selectList("recipe.findByRecipeNameContaining", query);
+    }
+
     // 특정 레시피 가져오기
     public Recipe selectRecipeById(String rcpSeq) {
         return sqlSession.selectOne("recipe.selectRecipeById", rcpSeq);
