@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -93,6 +94,17 @@ public class CRecipeController {
 
         if (loginUser != null) {
             try {
+                CRecipe originCRecipe = cRecipeService.getRecipeById(cRecipe.getId());
+                List<CManual> originSteps = originCRecipe.getManualSteps();
+                List<CManual> newSteps = cRecipe.getManualSteps();
+
+                for(int i = originSteps.size(); i <= newSteps.size() - 1; i++) {
+                    cRecipeService.insertCManualStep(newSteps.get(i));
+                }
+                for(int i = newSteps.size(); i <= originSteps.size() - 1; i++) {
+                    cRecipeService.deleteCManualStep(originSteps.get(i));
+                }
+
                 for (CManual step : cRecipe.getManualSteps()) {
                     System.out.println("step: " + step.toString());
                 }

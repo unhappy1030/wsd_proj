@@ -24,6 +24,9 @@ public class CRecipeService {
     public int insertCManual(List<CManual> cManuals) {
         return cRecipeDAO.insertCManual(cManuals);
     }
+    public int insertCManualStep(CManual cManual) {
+        return cRecipeDAO.insertCManualStep(cManual);
+    }
 
     public List<CRecipe> getAllRecipes(String userId) {
         return cRecipeDAO.selectAllCRecipes(userId);
@@ -51,5 +54,8 @@ public class CRecipeService {
         cRecipeDAO.deleteCNutritionById(id);
         cRecipeDAO.deleteCManualById(id);
         cRecipeDAO.deleteCRecipeById(id);
+    }
+    public void deleteCManualStep(CManual cManual) {
+        cRecipeDAO.deleteCManualByIdOrder(cManual);
     }
 }

@@ -25,6 +25,9 @@ public class CRecipeDAO {
     public int insertCManual(List<CManual> cManuals) {
         return sqlSession.insert("crecipe.insertCManualSteps", cManuals);
     }
+    public int insertCManualStep(CManual cManual) {
+        return sqlSession.insert("crecipe.insertCManualStep", cManual);
+    }
 
     public List<CRecipe> selectAllCRecipes(String userId) {
         return sqlSession.selectList("crecipe.selectAllRecipes", userId);
@@ -65,6 +68,7 @@ public class CRecipeDAO {
     public void deleteCRecipeById(int id) {
         sqlSession.delete("crecipe.deleteCRecipeById", id);
     }
-
-
+    public void deleteCManualByIdOrder(CManual cManual) {
+        sqlSession.delete("crecipe.deleteCManualStepByIdOrder", cManual);
+    }
 }
