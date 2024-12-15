@@ -3,6 +3,7 @@ package org.example.wsd_proj.controller;
 import org.example.wsd_proj.Service.CRecipeService;
 import org.example.wsd_proj.VO.CManual;
 import org.example.wsd_proj.VO.CRecipe;
+import org.example.wsd_proj.VO.CRecipeIngredient;
 import org.example.wsd_proj.VO.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/custom")
@@ -123,5 +125,18 @@ public class CRecipeController {
     @GetMapping("/create")
     public String create(Model model) {
         return "crecipe-create";
+    }
+    @PostMapping("/updateCheckList")
+    public String updateCheckList(@RequestBody List<CRecipeIngredient> ingredients, Model model, HttpSession session) {
+        if (ingredients != null && !ingredients.isEmpty()) {
+            for (CRecipeIngredient ingredient : ingredients) {
+                System.out.println("ingredient: " + ingredient.toString());
+//                cRecipeService.saveIngredients(ingredient);  // 재료를 DB에 저장하는 메서드 호출 (가정)
+            }
+            model.addAttribute("message", "재료 리스트가 성공적으로 저장되었습니다.");
+        } else {
+            model.addAttribute("message", "재료 리스트가 비어 있습니다.");
+        }
+        return "successPage";  // 성공 페이지로 리다이렉트
     }
 }
