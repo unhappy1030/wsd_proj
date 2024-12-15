@@ -51,12 +51,9 @@ public class CRecipeController {
             System.out.println("insertedRecipeId: " + insertedRecipeId);
             // 추가된 레시피의 ID를 사용하여 CNutrition 및 CManual에 recipeId 설정
             cRecipe.getNutritionInfo().setRecipeId(String.valueOf(insertedRecipeId));
-            int i = 0;
             for (CManual step : cRecipe.getManualSteps()) {
                 step.setRecipeId(String.valueOf(insertedRecipeId));
-                step.setStepOrder(i);
                 System.out.println("step: " + step.toString());
-                i++;
             }
 
             cRecipeService.insertCNutrition(cRecipe.getNutritionInfo());
