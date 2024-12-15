@@ -133,12 +133,16 @@ public class CRecipeController {
         if (ingredients != null && !ingredients.isEmpty()) {
             for (CRecipeIngredient ingredient : ingredients) {
                 System.out.println("ingredient: " + ingredient.toString());
-//                cRecipeService.saveIngredients(ingredient);  // 재료를 DB에 저장하는 메서드 호출 (가정)
+            }
+            cRecipeService.deleteCIngredientsById(ingredients.get(0).getRecipeId());
+
+            for(int i = 0; i < ingredients.size(); i++) {
+                cRecipeService.insertCIngredient(ingredients.get(i));
             }
             model.addAttribute("message", "재료 리스트가 성공적으로 저장되었습니다.");
         } else {
             model.addAttribute("message", "재료 리스트가 비어 있습니다.");
         }
-        return "successPage";  // 성공 페이지로 리다이렉트
+        return "redirect : /";  // 성공 페이지로 리다이렉트
     }
 }

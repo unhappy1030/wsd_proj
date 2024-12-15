@@ -49,8 +49,11 @@
           <div class="ingredient mb-2" data-ingredient-id="${status.index}">
             <input type="hidden" name="ingredients[${status.index}].id" value="${status.index}">
             <input type="hidden" name="ingredients[${status.index}].recipeId" value="${recipe.id}">
-            <input type="checkbox" id="ingredientCheck${status.index}" class="form-check-input" name="ingredients[${status.index}].selected" value="true">
-            <input type="text" class="form-control" name="ingredients[${status.index}].name" value="${ingredient.name}" required>
+            <select name="ingredients[${status.index}].isAvailable" class="form-control">
+              <option value="1" ${ingredient.isAvailable != 0 ? 'selected' : ''}>ready</option>
+              <option value="0" ${ingredient.isAvailable == 0 ? 'selected' : ''}>Not ready</option>
+            </select>
+            <input type="text" class="form-control" name="ingredients[${status.index}].ingredientName" value="${ingredient.ingredientName}" required>
             <button type="button" class="btn btn-danger btn-sm remove-ingredient-button">삭제</button>
           </div>
         </c:forEach>
@@ -134,9 +137,12 @@
     // 동적으로 새로운 재료 필드 생성 (문자열 연결 방식 사용)
     newIngredient.innerHTML =
             '<input type="hidden" name="ingredients[' + ingredientCount + '].id" value="' + ingredientCount + '">' +
-            '<input type="hidden" name="ingredients[' + ingredientCount + '].recipeId" value=${recipe.id}>' +
-            '<input type="checkbox" id="ingredientCheck' + ingredientCount + '" class="form-check-input" name="ingredients[' + ingredientCount + '].selected" value="true">' +
-            '<input type="text" class="form-control" name="ingredients[' + ingredientCount + '].name" placeholder="재료 이름" required>' +
+            '<input type="hidden" name="ingredients[' + ingredientCount + '].recipeId" value="${recipe.id}">' +
+            '<select name="ingredients[' + ingredientCount + '].isAvailable" class="form-control">' +
+            '  <option value="1">ready</option>' +
+            '  <option value="0">Not ready</option>' +
+            '</select>' +
+            '<input type="text" class="form-control" name="ingredients[' + ingredientCount + '].ingredientName" placeholder="재료 이름" required>' +
             '<button type="button" class="btn btn-danger btn-sm remove-ingredient-button">삭제</button>';
 
     ingredientsContainer.appendChild(newIngredient);
@@ -160,16 +166,15 @@
     Array.from(ingredients).forEach(function (ingredient, index) {
       const hiddenIdInput = ingredient.querySelector('input[name*=".id"]');
       const hiddenRecipeIdInput = ingredient.querySelector('input[name*=".recipeId"]');
-      const checkboxInput = ingredient.querySelector('input[type="checkbox"]');
+      const selectInput = ingredient.querySelector('select');
       const nameInput = ingredient.querySelector('input[type="text"]');
 
       // name 속성 및 값 갱신 (문자열 연결 방식 사용)
       hiddenIdInput.name = "ingredients[" + index + "].id";
       hiddenIdInput.value = index; // ID 값 갱신
       hiddenRecipeIdInput.name = "ingredients[" + index + "].recipeId";
-      checkboxInput.name = "ingredients[" + index + "].selected";
-      checkboxInput.id = "ingredientCheck" + index;
-      nameInput.name = "ingredients[" + index + "].name";
+      selectInput.name = "ingredients[" + index + "].isAvailable";
+      nameInput.name = "ingredients[" + index + "].ingredientName";
 
       ingredient.setAttribute('data-ingredient-id', index); // data-ingredient-id 갱신
     });
@@ -178,6 +183,7 @@
     console.log("재정렬 후 재료 개수: " + ingredientCount); // 디버깅용 로그 출력
   }
 </script>
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

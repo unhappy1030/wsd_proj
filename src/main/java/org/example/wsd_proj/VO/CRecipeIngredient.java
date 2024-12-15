@@ -11,5 +11,5 @@ public class CRecipeIngredient {
     private int id;
     private int recipeId;
     private String ingredientName;
-    private boolean isAvailable;
+    private int isAvailable;
 }

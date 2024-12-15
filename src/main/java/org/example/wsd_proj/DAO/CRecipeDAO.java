@@ -28,6 +28,9 @@ public class CRecipeDAO {
     public int insertCManualStep(CManual cManual) {
         return sqlSession.insert("crecipe.insertCManualStep", cManual);
     }
+    public int insertCIngredient(CRecipeIngredient cRecipeIngredient) {
+        return sqlSession.insert("crecipe.insertCRecipeIngredient", cRecipeIngredient);
+    }
 
     public List<CRecipe> selectAllCRecipes(String userId) {
         return sqlSession.selectList("crecipe.selectAllRecipes", userId);
@@ -43,6 +46,9 @@ public class CRecipeDAO {
 
     public List<CManual> selectCManualById(int id) {
         return sqlSession.selectList("crecipe.selectCManualById", id);
+    }
+    public List<CRecipeIngredient> selectCRecipeIngredientById(int id) {
+        return sqlSession.selectList("crecipe.selectCRecipeIngredientById", id);
     }
 
     public void updateCNutrition(CNutrition cNutrition) {
@@ -70,5 +76,8 @@ public class CRecipeDAO {
     }
     public void deleteCManualByIdOrder(CManual cManual) {
         sqlSession.delete("crecipe.deleteCManualStepByIdOrder", cManual);
+    }
+    public void deleteCRecipeIngredientsById(int id) {
+        sqlSession.delete("crecipe.deleteCRecipeIngredientsById", id);
     }
 }
