@@ -78,6 +78,22 @@
         )
     </insert>
 
+    <insert id="insertCRecipeIngredient" parameterType="org.example.wsd_proj.VO.CRecipeIngredient">
+        INSERT INTO crecipe_ingredients (
+        id,
+        recipe_id,
+        ingredient_name,
+        is_available
+        )
+        VALUES
+        (
+        #{id},
+        #{recipeId},
+        #{ingredientName},
+        #{isAvailable}
+        )
+    </insert>
+
 
     <select id="selectAllRecipes" parameterType="String" resultType="org.example.wsd_proj.VO.CRecipe">
         SELECT * FROM crecipes WHERE user_id = '${userId}';
@@ -91,6 +107,9 @@
     </select>
     <select id="selectCManualById" parameterType="int" resultType="org.example.wsd_proj.VO.CManual">
         SELECT * FROM cmanual_steps WHERE recipe_id = #{id} ORDER BY step_order;
+    </select>
+    <select id="selectCRecipeIngredientById" parameterType="int" resultType="org.example.wsd_proj.VO.CRecipeIngredient">
+        SELECT * FROM crecipe_ingredients WHERE recipe_id = #{id} ORDER BY id;
     </select>
 
     <update id="updateCRecipe" parameterType="org.example.wsd_proj.VO.CRecipe">
@@ -143,6 +162,10 @@
     <delete id="deleteCManualStepByIdOrder" parameterType="org.example.wsd_proj.VO.CManual">
         DELETE FROM cmanual_steps
         WHERE recipe_id = #{recipeId} AND step_order = #{stepOrder}
+    </delete>
+    <delete id="deleteCRecipeIngredientsById" parameterType="int">
+        DELETE FROM crecipe_ingredients
+        WHERE recipe_id = #{id}
     </delete>
 </mapper>
 

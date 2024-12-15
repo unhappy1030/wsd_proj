@@ -23,18 +23,5 @@ public class CRecipe {
     private String mainImagePath;
     private CNutrition nutritionInfo;
     private List<CManual> manualSteps;
-    @Override
-    public String toString() {
-        return "CRecipe{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", recipeName='" + recipeName + '\'' +
-                ", cookingMethod='" + cookingMethod + '\'' +
-                ", dishType='" + dishType + '\'' +
-                ", ingredients='" + ingredients + '\'' +
-                ", hashTag='" + hashTag + '\'' +
-                ", lowSodiumTip='" + lowSodiumTip + '\'' +
-                ", mainImagePath='" + mainImagePath + '\'' +
-                '}';
-    }
+    private List<CRecipeIngredient> ingredientList;
 }

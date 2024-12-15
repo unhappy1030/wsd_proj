@@ -4,6 +4,7 @@ import org.example.wsd_proj.DAO.CRecipeDAO;
 import org.example.wsd_proj.VO.CManual;
 import org.example.wsd_proj.VO.CNutrition;
 import org.example.wsd_proj.VO.CRecipe;
+import org.example.wsd_proj.VO.CRecipeIngredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,9 @@ public class CRecipeService {
     public int insertCManualStep(CManual cManual) {
         return cRecipeDAO.insertCManualStep(cManual);
     }
+    public int insertCIngredient(CRecipeIngredient cRecipeIngredient) {
+        return cRecipeDAO.insertCIngredient(cRecipeIngredient);
+    }
 
     public List<CRecipe> getAllRecipes(String userId) {
         return cRecipeDAO.selectAllCRecipes(userId);
@@ -36,6 +40,7 @@ public class CRecipeService {
         if (recipe != null) {
             recipe.setNutritionInfo(cRecipeDAO.selectCNutritionById(id));
             recipe.setManualSteps(cRecipeDAO.selectCManualById(id));
+            recipe.setIngredientList(cRecipeDAO.selectCRecipeIngredientById(id));
         }
         return recipe;
     }
@@ -57,5 +62,9 @@ public class CRecipeService {
     }
     public void deleteCManualStep(CManual cManual) {
         cRecipeDAO.deleteCManualByIdOrder(cManual);
+    }
+
+    public void deleteCIngredientsById(int id) {
+        cRecipeDAO.deleteCRecipeIngredientsById(id);
     }
 }
