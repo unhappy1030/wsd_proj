@@ -62,6 +62,22 @@
             )
         </foreach>
     </insert>
+    <insert id="insertCManualStep" parameterType="org.example.wsd_proj.VO.CManual">
+        INSERT INTO cmanual_steps (
+        recipe_id,
+        step_order,
+        step_description,
+        step_image_path
+        )
+        VALUES
+        (
+        #{recipeId},
+        #{stepOrder},
+        #{stepDescription},
+        #{stepImagePath}
+        )
+    </insert>
+
 
     <select id="selectAllRecipes" parameterType="String" resultType="org.example.wsd_proj.VO.CRecipe">
         SELECT * FROM crecipes WHERE user_id = '${userId}';
@@ -103,7 +119,7 @@
         WHERE recipe_id = #{recipeId}
     </update>
 
-    <update id="updateSingleCManualStep" parameterType="CManual">
+    <update id="updateSingleCManualStep" parameterType="org.example.wsd_proj.VO.CManual">
         UPDATE cmanual_steps
         SET
         step_description = #{stepDescription},
@@ -123,6 +139,10 @@
     <delete id="deleteCManualStepsById" parameterType="int">
         DELETE FROM cmanual_steps
         WHERE recipe_id = #{id}
+    </delete>
+    <delete id="deleteCManualStepByIdOrder" parameterType="org.example.wsd_proj.VO.CManual">
+        DELETE FROM cmanual_steps
+        WHERE recipe_id = #{recipeId} AND step_order = #{stepOrder}
     </delete>
 </mapper>
 
