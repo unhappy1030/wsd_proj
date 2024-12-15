@@ -143,6 +143,6 @@ public class CRecipeController {
         } else {
             model.addAttribute("message", "재료 리스트가 비어 있습니다.");
         }
-        return "redirect : /";  // 성공 페이지로 리다이렉트
+        return "redirect:/custom/";  // 성공 페이지로 리다이렉트
     }
 }

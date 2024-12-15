@@ -139,8 +139,8 @@
             '<input type="hidden" name="ingredients[' + ingredientCount + '].id" value="' + ingredientCount + '">' +
             '<input type="hidden" name="ingredients[' + ingredientCount + '].recipeId" value="${recipe.id}">' +
             '<select name="ingredients[' + ingredientCount + '].isAvailable" class="form-control">' +
-            '  <option value="1">ready</option>' +
             '  <option value="0">Not ready</option>' +
+            '  <option value="1">ready</option>' +
             '</select>' +
             '<input type="text" class="form-control" name="ingredients[' + ingredientCount + '].ingredientName" placeholder="재료 이름" required>' +
             '<button type="button" class="btn btn-danger btn-sm remove-ingredient-button">삭제</button>';
