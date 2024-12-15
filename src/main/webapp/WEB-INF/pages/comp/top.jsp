@@ -9,7 +9,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- 사이트 이름 -->
-        <a class="navbar-brand" href="<%= request.getContextPath() %>/">MySite</a>
+        <a class="navbar-brand" href="<%= request.getContextPath() %>/">TodoRecipe</a>
 
         <!-- 링크 버튼 -->
         <div class="d-flex">
