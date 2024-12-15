@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,6 +22,14 @@ public class RecipeController {
         List<Recipe> recipes = recipeService.getAllRecipes();
         model.addAttribute("recipes", recipes); // 모델에 레시피 리스트 추가
         return "recipe-list";  // 'recipe-list.jsp' 파일을 렌더링
+    }
+
+    @GetMapping("/search")
+    public String searchRecipes(@RequestParam("query") String query, Model model) {
+        List<Recipe> recipes = recipeService.searchRecipes(query);
+        model.addAttribute("recipes", recipes); // 검색된 레시피 리스트 추가
+        model.addAttribute("query", query); // 검색어를 모델에 추가하여 폼에 보여주기
+        return "recipe-list"; // 'recipe-list.jsp' 파일을 렌더링
     }
 
     // 레시피 상세 페이지

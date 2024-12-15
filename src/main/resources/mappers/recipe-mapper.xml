@@ -9,6 +9,11 @@
         SELECT * FROM recipes;
     </select>
 
+    <select id="findByRecipeNameContaining" parameterType="String" resultType="org.example.wsd_proj.VO.Recipe">
+        SELECT * FROM recipes
+        WHERE recipe_name LIKE CONCAT('%', #{query}, '%');
+    </select>
+
     <!-- 특정 레시피 가져오기 -->
     <select id="selectRecipeById" parameterType="String" resultType="org.example.wsd_proj.VO.Recipe">
         SELECT * FROM recipes WHERE RCP_SEQ = #{rcpSeq};

@@ -18,6 +18,10 @@ public class RecipeService {
         return recipeDAO.selectAllRecipes();
     }
 
+    public List<Recipe> searchRecipes(String query) {
+        return recipeDAO.findByRecipeNameContaining(query);
+    }
+
     // 레시피 상세 정보 가져오기
     public Recipe getRecipeById(String rcpSeq) {
         Recipe recipe = recipeDAO.selectRecipeById(rcpSeq);
