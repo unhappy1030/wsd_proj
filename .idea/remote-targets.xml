@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <option name="projectDefaultTargetUuid" value="f403877f-e5db-48a7-9219-7d8c68ad08da" />
+    <targets>
+      <target name="OSS24_22100597@walab.handong.edu:22" type="ssh/sftp" uuid="f403877f-e5db-48a7-9219-7d8c68ad08da">
+        <config>
+          <option name="projectRootOnTarget" value="/home2/class2024/OSS24_22100597/webapps" />
+          <option name="serverName" value="OSS24_22100597@walab.handong.edu:22 password" />
+        </config>
+        <ContributedStateBase type="MavenRuntime">
+          <config>
+            <option name="homePath" value="/usr/share/maven" />
+            <option name="versionString" value="[1mApache Maven 3.6.0[m" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>
